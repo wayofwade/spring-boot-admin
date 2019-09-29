@@ -1,9 +1,13 @@
 package com.example.demo.controller.permission.user;
 
+import com.alibaba.fastjson.JSONObject;
+import com.example.demo.config.exception.GlobalExceptionHandler;
 import com.example.demo.model.common.CommonRes;
 import com.example.demo.model.common.CommonSearch;
 import com.example.demo.model.permission.user.User;
 import com.example.demo.service.permission.user.UserService;
+import com.example.demo.util.CommonUtil;
+import com.example.demo.util.constants.ErrorEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +32,7 @@ public class UserController {
 
     /**
      * 保存用户
-     * @param user
+     * @param
      * @return
      */
     @ResponseBody
@@ -49,11 +53,15 @@ public class UserController {
     }
 
 
+    /**
+     * 测试统一错误处理
+     * @param a
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = "/list", method= RequestMethod.GET)
-    public CommonRes getList(CommonSearch a){
-        CommonRes res = new CommonRes();
-        return res;
+    @RequestMapping(value = "/error", method= RequestMethod.GET)
+    public JSONObject error(CommonSearch a){
+        return CommonUtil.errorJson(ErrorEnum.E_500);
     }
 
 
