@@ -20,7 +20,12 @@ public class CommonRes implements Serializable {
     public static final int RES_NEED_AUTH = 1009;
     public static final int RES_TIMEOUT = 1010;
     public static final int RES_NOT_ALLOW = 1011;
+
+    // 旧版本的返回值
     private int rc = 0;
+
+    // 新版本的返回值
+    private int code = 0;
     private String msgInfo;
     private String errorInfo;
     private Date serverTime;
@@ -64,5 +69,13 @@ public class CommonRes implements Serializable {
 
     public void setLogTrackInfo(String logTrackInfo) {
         this.logTrackInfo = logTrackInfo;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

@@ -12,7 +12,9 @@ public class User {
     private String password;
     private Date createTime;
     private Date updateTime;
-    private String status;
+
+    // 默认创建的时候为1
+    private String status = "1";
 
     public int getUid() {
         return uid;

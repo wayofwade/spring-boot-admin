@@ -1,9 +1,9 @@
 package com.example.demo.controller.permission.user;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.demo.config.exception.GlobalExceptionHandler;
 import com.example.demo.model.common.CommonRes;
 import com.example.demo.model.common.CommonSearch;
+import com.example.demo.model.permission.user.ListUserRes;
 import com.example.demo.model.permission.user.User;
 import com.example.demo.service.permission.user.UserService;
 import com.example.demo.util.CommonUtil;
@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by Administrator on 2019/9/28.
  */
 @RestController
-@RequestMapping(value="/user")
+@RequestMapping(value="/permission/user")
 public class UserController {
 
     @Autowired
@@ -36,19 +36,9 @@ public class UserController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/add", method= RequestMethod.GET)
-    public CommonRes addUser(@RequestParam Map<String,String> map){
-        CommonRes res = new CommonRes();
-        User user = new User();
-        user.setUsername("chenlaocong");
-        user.setPassword("123456");
-        user.setStatus("1");
-        user.setCreateTime(new Date());
-        user.setUpdateTime(new Date());
-        int code = userService.addUser(user);
-        if (code == 0){
-            res.setMsgInfo("保存错误！！");
-        }
+    @RequestMapping(value = "/add", method= RequestMethod.POST )
+    public CommonRes addUser(@RequestBody User user){
+        CommonRes res = userService.addOrUpdate(user);
         return res;
     }
 
@@ -75,5 +65,22 @@ public class UserController {
         return res;
     }
 
+
+    /**
+     * 根据条件获取用户数据
+     * @param commonSearch
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/list", method= RequestMethod.POST)
+    public ListUserRes getList(@RequestBody CommonSearch commonSearch){
+        int start = commonSearch.getStart();
+        int size = commonSearch.getSize();
+        String status = commonSearch.getStatus();
+        String name = commonSearch.getName();
+
+        ListUserRes res = userService.getUsers(start,size,status,name);
+        return res;
+    }
 
 }
