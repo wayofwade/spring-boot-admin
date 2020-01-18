@@ -22,6 +22,6 @@ public interface UserService {
     int getCount(String status, String name);
 
     // 删除或者恢复
-    int setStatus(int uid, String status);
+    CommonRes setStatus(int uid, String status);
 
 }

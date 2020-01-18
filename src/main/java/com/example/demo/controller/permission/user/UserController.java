@@ -55,13 +55,25 @@ public class UserController {
     }
 
 
-
-
-
+    /**
+     * 删除用户
+     * @param commonSearch
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = "/list2", method= RequestMethod.GET)
-    public CommonRes getList2(@RequestParam String a){
+    @RequestMapping(value = "/del", method= RequestMethod.POST)
+    public CommonRes delUser(@RequestBody CommonSearch commonSearch){
         CommonRes res = new CommonRes();
+
+        int uid = commonSearch.getId();
+        String status = commonSearch.getStatus();
+        if (uid == 0 || status == "" || status == null) {
+            res.setCode(1004);
+            res.setErrorInfo("请检查uid或者status是否正确");
+            return res;
+        }
+
+        res = userService.setStatus(uid, status);
         return res;
     }
 

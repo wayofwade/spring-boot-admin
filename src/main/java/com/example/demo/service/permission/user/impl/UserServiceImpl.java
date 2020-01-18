@@ -26,6 +26,12 @@ public class UserServiceImpl implements UserService{
         return userDao.addUser(user);
     }
 
+
+    /**
+     * 修改或者添加用户
+     * @param user
+     * @return
+     */
     @Override
     public CommonRes addOrUpdate(User user) {
         CommonRes res = new CommonRes();
@@ -75,8 +81,21 @@ public class UserServiceImpl implements UserService{
         return 0;
     }
 
+
+    /**
+     * 删除用户
+     * @param uid
+     * @param status
+     * @return
+     */
     @Override
-    public int setStatus(int uid, String status) {
-        return 0;
+    public CommonRes setStatus(int uid, String status) {
+        CommonRes res = new CommonRes();
+        int code = userDao.setStatus(uid,status);
+        if (code == 0) {
+            res.setCode(1004);
+            res.setErrorInfo("删除失败");
+        }
+        return res;
     }
 }

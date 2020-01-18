@@ -12,6 +12,10 @@ public class CommonSearch {
     private int start;
     private String type;
 
+    private long startTime;
+    private long endTime;
+
+
     public int getId() {
         return id;
     }
@@ -58,5 +62,21 @@ public class CommonSearch {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 }
